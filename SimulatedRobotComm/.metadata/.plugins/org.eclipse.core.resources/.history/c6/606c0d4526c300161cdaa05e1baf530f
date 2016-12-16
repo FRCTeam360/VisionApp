@@ -1,0 +1,14 @@
+package org.usfirst.frc.team360.robot;
+
+
+import org.usfirst.frc.team360.robot.AdbBridge;
+
+public class RobotServer {
+	static AdbBridge bridge;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+			bridge = new AdbBridge();
+			bridge.start();
+	}
+
+}

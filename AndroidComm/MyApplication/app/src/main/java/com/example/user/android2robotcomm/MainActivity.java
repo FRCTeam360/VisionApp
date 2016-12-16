@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity  {
         b.setOnClickListener(new View.OnClickListener(){
           public void onClick(View v){
 
-              Log.e("Sas", "pressed");
+              Log.e("Sas", "hello");
               try {
                   t.setText(((Integer)i).toString());
                   i++;

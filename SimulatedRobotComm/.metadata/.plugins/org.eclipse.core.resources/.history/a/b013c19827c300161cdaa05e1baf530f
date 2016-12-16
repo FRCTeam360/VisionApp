@@ -1,0 +1,54 @@
+package org.usfirst.frc.team360.robot;
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import org.usfirst.frc.team360.robot.AdbBridge;
+
+public class RobotServer implements Runnable{
+	static AdbBridge bridge;
+	 String line;
+	 String line2;
+	 static Process shell;
+	 static BufferedReader bufferedReader;
+	 static BufferedReader bufferedReader2;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+			bridge = new AdbBridge();
+			bridge.start();
+			shell = bridge.startShell();
+			if(shell != null){
+		  		 bufferedReader = new BufferedReader(
+		  		new InputStreamReader(shell.getInputStream()));
+		  		 bufferedReader2 = new BufferedReader(
+		  		new InputStreamReader(shell.getErrorStream()));
+
+		  		StringBuilder log=new StringBuilder();
+		  		String line = "";
+		  		
+		  	}	 
+			(new Thread(new RobotServer())).start();
+	}
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			String line1;
+			while(true){
+				try {
+					if((line1 = bufferedReader.readLine()) != null){
+						System.out.println(line1);
+						}
+					if((line2 = bufferedReader2.readLine()) != null){
+						System.out.println(line2);
+						}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.toString());
+				}
+			}
+		}
+		
+}
