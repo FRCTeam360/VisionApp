@@ -1,0 +1,31 @@
+package org.usfirst.frc.team360.robot;
+import java.io.*;
+import java.net.*;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+class TCPClient
+{
+ public TCPClient()
+ {
+	 try{
+		  SmartDashboard.putString("FROM d: ", "beginning");
+		  	AdbBridge g = new AdbBridge();
+		  	g.start();
+		  	Process shell = g.startShell();
+		  	if(shell != null){
+		  		 BufferedReader bufferedReader = new BufferedReader(
+		  		new InputStreamReader(shell.getInputStream()));
+
+		  		StringBuilder log=new StringBuilder();
+		  		String line = "";
+		  		while ((line = bufferedReader.readLine()) != null) {
+		  			log.append(line);
+		  		}
+		  		SmartDashboard.putString("Shell: ", log.toString());
+		  	}	 
+	 }catch(Exception e){
+		 
+	 }
+ }
+}
