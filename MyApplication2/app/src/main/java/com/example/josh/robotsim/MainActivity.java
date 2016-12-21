@@ -65,10 +65,13 @@ public class MainActivity extends AppCompatActivity {
                     System.currentTimeMillis() - timeSinceLastMessage < 333){
                 try {
                     while(inFromClient.ready() && (clientSentence = inFromClient.readLine()) != null){
-                        Log.e("Sas", clientSentence);
-                        if(clientSentence.equals("Knock Knock")){
-                            send("Whos There");
+                        if(clientSentence.equals("Knock Knock Request")){
+                            Log.e("Sas", "Recieved Knock Knock Request");
+                            send(createWhosThereTag());
                             timeSinceLastMessage = System.currentTimeMillis();
+                        } else if(clientSentence.equals("App Type Request")){
+                            Log.e("Sas", "Recieved App Type Request");
+                            send(createInfoResponse());
                         }
                     }
                 } catch (Exception e) {
@@ -107,6 +110,18 @@ public class MainActivity extends AppCompatActivity {
                 run();
             }
 
+        }
+        public String createInfoResponse(){
+            return createMessageTypeTag("phoneType") + createTaggedMessage("phoneType", "commTester");
+        }
+        public String createWhosThereTag(){
+            return createTaggedMessage("whosThere", "Whos There");
+        }
+        public String createMessageTypeTag(String messageType){
+            return createTaggedMessage("messageType", messageType);
+        }
+        public String createTaggedMessage(String tag, String message){
+            return "<" + tag + ">" + message + "</" + tag + ">";
         }
         public void send(String message){
             try {

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.usfirst.frc.team360.robot.*;
 
 public class RobotServer {
+	enum PhoneType {UNKNOWN, COMMSTEST, VISION, COMMAND};  
 	AdbBridge bridge;
 	String line;
 	String line2;
@@ -40,7 +41,6 @@ public class RobotServer {
 			}
 		});
 	 }
-	
 	public static RobotServer getInstance(){
 		if(robotServer == null){
 			robotServer = new RobotServer();
@@ -54,36 +54,39 @@ public class RobotServer {
 	}
 	
 	protected class DevicesReader implements Runnable{
+		ArrayList<String> foundDevices = new ArrayList<String>();
+		boolean found;
 		public DevicesReader(){
 			 
 		}
-		ArrayList<String> foundDevices = new ArrayList<String>();
-		boolean found;
 		public void run() {
 			// TODO Auto-generated method stub
-			String line1;
+			String devicesInput;
 			while(shouldRun){
 				try {
 					devicesShell = bridge.getDevices();
 					foundDevices.clear();
 					if(devicesShell != null){
 						bufferedReaderDevices = new BufferedReader(new InputStreamReader(devicesShell.getInputStream()));	
-					}	
-					while((line1 = bufferedReaderDevices.readLine()) != null){
+					}
+					while(!bufferedReaderDevices.ready()){
+						Thread.sleep(1);
+					}
+					while((devicesInput = bufferedReaderDevices.readLine()) != null){
 						found = false;
-						if(!line1.equals("List of devices attached")){// eliminate the first line because it passes the next test case but we don't care about this string
-							if(line1.contains("device")){// if the line is one we care about
-								line1 = line1.substring(0, line1.indexOf("device"));// isolate the device name
-								foundDevices.add(line1);
+						if(!devicesInput.equals("List of devices attached")){// eliminate the first line because it passes the next test case but we don't care about this string
+							if(devicesInput.contains("device")){// if the line is one we care about
+								devicesInput = devicesInput.substring(0, devicesInput.indexOf("device"));// isolate the device name
+								foundDevices.add(devicesInput);
 								for(String s : activeDevices){// search through the list of active devices
-									if(line1.equals(s)){// if the device is in the list of active threads
+									if(devicesInput.equals(s)){// if the device is in the list of active threads
 										found = true;// if the device has been found already then dont create a new reader
 									}
 								}
 								if(!found){// if the device isn't already active
-									System.out.println(line1);// print the name of the found device
-									activeDevices.add(line1);// add the device name to the list of active names
-									phoneConnections.add(new PhoneConnection(line1, localPortInUse++, phonePort));
+									System.out.println(devicesInput);// print the name of the found device
+									activeDevices.add(devicesInput);// add the device name to the list of active names
+									phoneConnections.add(new PhoneConnection(devicesInput, localPortInUse++, phonePort));
 								}
 							}
 						}
@@ -114,7 +117,9 @@ public class RobotServer {
 						}
 						phoneConnections.clear();
 					}
-					Thread.sleep(200);// sleep the thread so it only runs every 1/4 seconds
+					if(shouldRun){
+						Thread.sleep(200);// sleep the thread so it only runs every 1/5 seconds
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.toString());
