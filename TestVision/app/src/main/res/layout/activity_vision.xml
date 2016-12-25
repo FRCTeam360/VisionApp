@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:opencv="http://schemas.android.com/apk/res-auto"
+
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+                <ListView
+                    android:id="@+id/months_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"/>
+                <org.opencv.android.JavaCameraView
+                    android:layout_height="fill_parent"
+                    android:visibility="invisible"
+                    android:id="@+id/show_camera_activity_java_surface_view"
+                    opencv:show_fps="true"
+                    opencv:camera_id="any"
+                    android:layout_width="400dp" />
+        </FrameLayout>
 
-    <org.opencv.android.JavaCameraView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:visibility="gone"
-        android:id="@+id/show_camera_activity_java_surface_view"
-        opencv:show_fps="true"
-        opencv:camera_id="any" />
 
+        <TextView
+            android:id="@+id/robotConnectionDevice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Robot Connection Status: Disconnected"
+            android:textColor="@android:color/white"
+            android:paddingTop="15dp" />
+        <Button
+            android:id="@+id/button_send"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:onClick="onClick"/>
 </LinearLayout>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="300dp"
+    android:id="@+id/main">
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Control H Value Range"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/LowInputH"
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:layout_marginLeft="25dp" />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/HighInputH"
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:layout_marginLeft="225dp" />
+            </RelativeLayout>
+            <org.florescu.android.rangeseekbar.RangeSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rangebarH"
+                rsb:absoluteMinValue="0"
+                rsb:absoluteMaxValue="255"
+                rsb:singleThumb="false"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Control S Value Range"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/LowInputS"
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:layout_marginLeft="25dp" />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/HighInputS"
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:layout_marginLeft="225dp" />
+            </RelativeLayout>
+            <org.florescu.android.rangeseekbar.RangeSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rangebarS"
+                rsb:absoluteMinValue="0"
+                rsb:absoluteMaxValue="255"
+                rsb:singleThumb="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Control V Value Range"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/LowInputV"
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:layout_marginLeft="25dp" />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/HighInputV"
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:layout_marginLeft="225dp" />
+            </RelativeLayout>
+            <org.florescu.android.rangeseekbar.RangeSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rangebarV"
+                rsb:absoluteMinValue="0"
+                rsb:absoluteMaxValue="255"
+                rsb:singleThumb="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Control Exposure Value"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ExposureInput"
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:layout_marginLeft="25dp" />
+            </RelativeLayout>
+            <org.florescu.android.rangeseekbar.RangeSeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rangebarExposure"
+                rsb:absoluteMinValue="10"
+                rsb:absoluteMaxValue="100"
+                rsb:singleThumb="true"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
